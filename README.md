@@ -1,5 +1,5 @@
 # M5StickColorEnvirSensor
-M5Stick with color display, using Smooth C++ library and LittlevGL Graphics library that displays different views of Environment data, AxpPMU data.  The project also sets the RTC BM8563 time and date and sets the alram and date and prints out results.
+M5Stick with color display, using Smooth C++ library and LittlevGL Graphics library that displays different views of Environment data, AxpPMU data.  The project also sets the RTC BM8563 time and date and sets the RTC BM8563 alarm and prints out the number of times the alarm has been triggered.
 
 ## Overview
 This application shows how to use the Smooth C++ library and the LittlevGL Graphichs library
@@ -23,7 +23,7 @@ selected and is positioned below the title pane.
 
 ## Buttons
 To allow for more content pane area on the display I chose not to implement the menu pane but only use hardware
-buttons to change the view. The app uses the two hadrware buttons available on the M5StickC device to select the 
+buttons to change the view. The app uses the two hardware buttons available on the M5StickC device to select the 
 NEXT view or the PREV view. The app performs software debounce on the buttons.  The front button "labeled M5" is 
 used to select the previous view when the button is RELEASED.  The side button is used to select the next view 
 when the button is PRESSED.
@@ -35,7 +35,7 @@ The app has 2 additional tasks running besides the Application Task.
 
 ## RTC - BM8563
 The app programs the RTC to a date and time of Tuesday, Februray 25, 2020 1:08 pm. The alarm day, day of week and time is programmed to 
-Tuesday, 25th, 1:12pm and to trigger the alarm on every 12 minutes past any hour, any day and any weekday.  so alarm will trigger
+Tuesday, 25th, 1:12pm and to trigger the alarm on every 12 minutes past any hour, any day and any weekday.  So alarm will trigger
 at 1:12pm, 2:12pm 3:12pm on any day or weekday.   The app keeps count of the number of times the alarm has triggered.
 
 ## Power Management - Axp192
