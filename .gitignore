@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+.vscode/*
+build
+cmake-build-*
+sdkconfig.old
+uncrustify.cfg
