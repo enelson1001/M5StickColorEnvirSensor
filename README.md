@@ -51,19 +51,19 @@ and temperature and altitude to determine sea level pressure.  The temperature r
 Some of of colors are washed out on some pictures but you get an idea of what the displays should look like.  
 
 The Temperature View
-![Temperature view](photos/DHT12_Temp.jpg)
+![Temperature view](photos/DHT12_Temp.JPG)
 
 The Humidity View
-![Humidity View](photos/DHT12_Humd.jpg)
+![Humidity View](photos/DHT12_Humd.JPG)
 
 The BMP280 View
-![BMP280 View](photos/BMP280.jpg)
+![BMP280 View](photos/BMP280.JPG)
 
 The AxpPMU #1 View
-![AxpPMU1](photos/AxpPMU1.jpg)
+![AxpPMU1](photos/AxpPMU1.JPG)
 
 The AxpPMU #2 View
-![AxpPMU2](photos/AxpPMU2.jpg)
+![AxpPMU2](photos/AxpPMU2.JPG)
 
 The AxpPMU #3 View
-![AxpPMU3](photos/AxpPMU3.jpg)
+![AxpPMU3](photos/AxpPMU3.JPG)
