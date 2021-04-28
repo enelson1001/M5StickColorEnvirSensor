@@ -43,55 +43,67 @@ namespace redstone
     {
         Log::info(TAG, "Creating CPAxpPmu3");
 
+        // create a plain style
+        lv_style_init(&plain_style);
+        lv_style_set_pad_top(&plain_style, LV_STATE_DEFAULT, 10);
+        lv_style_set_pad_bottom(&plain_style, LV_STATE_DEFAULT, 10);
+        lv_style_set_pad_left(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_pad_right(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_line_opa(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_pad_inner(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_margin_all(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_border_width(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_radius(&plain_style, LV_STATE_DEFAULT, 0);
+
         // create style for the content container
-        lv_style_copy(&content_container_style, &lv_style_plain);
-        content_container_style.body.main_color = lv_color_hex3(0X090);     // green
-        content_container_style.body.grad_color = lv_color_hex3(0X090);     // green
+        lv_style_copy(&content_container_style, &plain_style);
+        lv_style_set_bg_color(&content_container_style, LV_STATE_DEFAULT, lv_color_hex3(0x090));  // green
 
         // create a content container
         content_container = lv_cont_create(lv_scr_act(), NULL);
-        lv_cont_set_style(content_container, LV_CONT_STYLE_MAIN, &content_container_style);
+        lv_obj_add_style(content_container, LV_CONT_PART_MAIN, &content_container_style);
         lv_obj_set_size(content_container, width, height);
         lv_obj_align(content_container, NULL, LV_ALIGN_CENTER, 0, 10); // Offset so content pane is below title pane
         lv_obj_set_hidden(content_container, true);
 
         // create style for text value
-        lv_style_copy(&text_label_style, &lv_style_plain);
-        text_label_style.text.color = LV_COLOR_WHITE;
+        lv_style_init(&text_label_style);
+        lv_style_set_text_color(&text_label_style, LV_STATE_DEFAULT, LV_COLOR_WHITE);
+        lv_style_set_text_font(&text_label_style, LV_STATE_DEFAULT, &lv_font_montserrat_12);
 
         // create description for battery capacity
         lv_obj_t* label_batt_cap = lv_label_create(content_container, NULL);
-        lv_obj_set_style(label_batt_cap, &text_label_style);
-        lv_label_set_text(label_batt_cap, "Bat Charge:");
+        lv_obj_add_style(label_batt_cap, LV_LABEL_PART_MAIN, &text_label_style);
+        lv_label_set_text(label_batt_cap, "Bat Charge:  ");
         lv_obj_align(label_batt_cap, NULL, LV_ALIGN_IN_TOP_LEFT, 4, 4);
 
         // create description for battery charging current
         lv_obj_t* label_batt_chg = lv_label_create(content_container, NULL);
-        lv_obj_set_style(label_batt_chg, &text_label_style);
-        lv_label_set_text(label_batt_chg, "Bat Icharg:");
+        lv_obj_add_style(label_batt_chg, LV_LABEL_PART_MAIN, &text_label_style);
+        lv_label_set_text(label_batt_chg, "Bat Icharg:  ");
         lv_obj_align(label_batt_chg, label_batt_cap, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 4);
 
         // create description for battery discharging current
         lv_obj_t* label_batt_dischg = lv_label_create(content_container, NULL);
-        lv_obj_set_style(label_batt_dischg, &text_label_style);
-        lv_label_set_text(label_batt_dischg, "Bat Idchrg:");
+        lv_obj_add_style(label_batt_dischg, LV_LABEL_PART_MAIN, &text_label_style);
+        lv_label_set_text(label_batt_dischg, "Bat Idchrg:  ");
         lv_obj_align(label_batt_dischg, label_batt_chg, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 4);
 
         // create a dynamic label for battery capacity value
         battery_capacity_value_label = lv_label_create(content_container, NULL);
-        lv_obj_set_style(battery_capacity_value_label, &text_label_style);
+        lv_obj_add_style(battery_capacity_value_label, LV_LABEL_PART_MAIN, &text_label_style);
         lv_label_set_text(battery_capacity_value_label, "--");
         lv_obj_align(battery_capacity_value_label, label_batt_cap, LV_ALIGN_OUT_RIGHT_MID, 0, 0);
 
         // create a dynamic label for battery charging current value
         battery_charging_value_label = lv_label_create(content_container, NULL);
-        lv_obj_set_style(battery_charging_value_label, &text_label_style);
+        lv_obj_add_style(battery_charging_value_label, LV_LABEL_PART_MAIN, &text_label_style);
         lv_label_set_text(battery_charging_value_label, "--");
         lv_obj_align(battery_charging_value_label, label_batt_chg, LV_ALIGN_OUT_RIGHT_MID, 0, 0);
 
         // create a dynamic label for battery discharging current value
         battery_discharging_value_label = lv_label_create(content_container, NULL);
-        lv_obj_set_style(battery_discharging_value_label, &text_label_style);
+        lv_obj_add_style(battery_discharging_value_label, LV_LABEL_PART_MAIN, &text_label_style);
         lv_label_set_text(battery_discharging_value_label, "--");
         lv_obj_align(battery_discharging_value_label, label_batt_dischg, LV_ALIGN_OUT_RIGHT_MID, 0, 0);
     }

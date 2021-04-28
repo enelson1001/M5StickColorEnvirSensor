@@ -54,6 +54,7 @@ namespace redstone
             using SubQAxpValue = smooth::core::ipc::SubscribingTaskEventQueue<AxpValue>;
             std::shared_ptr<SubQAxpValue> subr_queue_axp_value;
 
+            lv_style_t plain_style;
             lv_style_t content_container_style;
             lv_style_t text_label_style;
             lv_style_t heat_index_label_style;

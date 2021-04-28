@@ -54,6 +54,7 @@ namespace redstone
             using SubQEnvirValue = smooth::core::ipc::SubscribingTaskEventQueue<EnvirValue>;
             std::shared_ptr<SubQEnvirValue> subr_queue_envir_value;
 
+            lv_style_t plain_style;
             lv_style_t content_container_style;
             lv_style_t text_label_style;
             lv_obj_t* content_container;

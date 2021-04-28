@@ -26,6 +26,7 @@ namespace redstone
 {
     // Class constants
     static const char* TAG = "EnvHat";
+    static const float T_COMP_CELSIUS = 3.9;           // temperature compenstation for DHT12 in EnvHat
 
     // Constructor
     EnvHat::EnvHat() :
@@ -101,7 +102,7 @@ namespace redstone
         {
             float temperature, humidity;
             dht12->read_measurements(humidity, temperature);
-            envir_value.set_temperture_degree_C(temperature);
+            envir_value.set_temperture_degree_C(temperature - T_COMP_CELSIUS);
             envir_value.set_relative_humidity(humidity);
         }
 

@@ -17,7 +17,7 @@
 #pragma once
 
 #include <lvgl/lvgl.h>
-#include <smooth/application/display/DisplaySpi.h>
+#include <smooth/application/display/LCDSpi.h>
 #include <smooth/application/display/ST7735.h>
 #include <smooth/core/io/spi/SpiDmaFixedBuffer.h>
 
@@ -43,7 +43,7 @@ namespace redstone
             void display_drv_flush(lv_disp_drv_t* drv, const lv_area_t* area, lv_color_t* color_map);
 
             /// Initialize the ST7735S display driver IC
-            bool init_display();
+            bool init_lcd_display();
 
             // Set the screen rotation
             void set_screen_rotation();
@@ -63,9 +63,7 @@ namespace redstone
             static constexpr int LINES_TO_SEND = 40;                                            // See Note 2
             static constexpr int MAX_DMA_LEN = (LV_HOR_RES_MAX * LINES_TO_SEND * COLOR_SIZE);   // See Note 3
 
-            spi_host_device_t spi_host;
-            smooth::core::io::spi::Master spi_master;
-            std::unique_ptr<smooth::application::display::DisplaySpi> display{};
+            std::unique_ptr<smooth::application::display::LCDSpi> lcd_display{};
             bool display_initialized{ false };
 
             smooth::core::io::spi::SpiDmaFixedBuffer<uint8_t, MAX_DMA_LEN> video_display_buffer1{};

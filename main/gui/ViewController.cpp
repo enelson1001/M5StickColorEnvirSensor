@@ -63,11 +63,11 @@ namespace redstone
         display_driver.initialize();
     
         // create the title panes
-        title_pane = std::make_unique<TitlePane>("DHT12 Temperature");
+        title_pane = std::make_unique<TitlePane>("DHT12  Temperature");
         title_pane->create(LV_HOR_RES, 20);
         title_panes[Temp] = std::move(title_pane);
 
-        title_pane = std::make_unique<TitlePane>("DHT12 Humidity");
+        title_pane = std::make_unique<TitlePane>("DHT12  Humidity");
         title_pane->create(LV_HOR_RES, 20);
         title_panes[Humidity] = std::move(title_pane);
     

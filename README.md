@@ -67,3 +67,12 @@ The AxpPMU #2 View
 
 The AxpPMU #3 View
 ![AxpPMU3](photos/AxpPMU3.JPG)
+
+# Versions
+### v1.0 : 
+- initial release
+### v2.0 : 
+- update to lvgl v7.11.0 commit ec9de51 - March 16, 2021
+- update to Smooth master commit 5578b8b - April 15, 2021 
+- update to esp-idf v4.3-beta3 commit e9cf9e2 - April 14, 2021
+- Added temperature compensation to DHT12 measurement

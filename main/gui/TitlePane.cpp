@@ -1,6 +1,6 @@
 /****************************************************************************************
  * TitlePane.cpp - A class that creates a simple title pane
- * 
+ *
  * Created on Jan. 04, 2020
  * Copyright (c) 2019 Ed Nelson (https://github.com/enelson1001)
  * Licensed under MIT License (see LICENSE file)
@@ -34,24 +34,25 @@ namespace redstone
     {
         Log::info(TAG, "Creating the Title Pane");
 
-        // create style for the titlepain
-        lv_style_copy(&title_style, &lv_style_plain);
-        title_style.body.main_color = LV_COLOR_BLACK;
-        title_style.body.grad_color = LV_COLOR_BLACK;
-        title_style.text.font = &lv_font_unscii_8;
-        title_style.text.color = LV_COLOR_WHITE;
+        // create style for the title pane
+        lv_style_init(&title_style);
+        lv_style_set_border_width(&title_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_radius(&title_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_bg_color(&title_style, LV_STATE_DEFAULT, LV_COLOR_BLACK);
+        lv_style_set_text_color(&title_style, LV_STATE_DEFAULT, LV_COLOR_WHITE);
+        lv_style_set_text_font(&title_style, LV_STATE_DEFAULT, &lv_font_montserrat_12);
 
         // create container for title pane
         title_container = lv_cont_create(lv_scr_act(), NULL);
         lv_obj_set_size(title_container, width, height);
         lv_cont_set_layout(title_container, LV_LAYOUT_CENTER);
         lv_obj_align(title_container, NULL, LV_ALIGN_IN_TOP_MID, 0, 0);  // place title pane at top
-        lv_cont_set_style(title_container, LV_CONT_STYLE_MAIN, &title_style);
+        lv_obj_add_style(title_container, LV_CONT_PART_MAIN, &title_style);
         lv_obj_set_hidden(title_container, true);
 
         // create a title label and place in title container
         title_label = lv_label_create(title_container, NULL);
-        lv_obj_set_style(title_label, &title_style);
+        lv_obj_add_style(title_label, LV_LABEL_PART_MAIN, &title_style);
         lv_label_set_text(title_label, title.c_str());
         lv_obj_align(title_label, NULL, LV_ALIGN_CENTER, 0, 0);
     }

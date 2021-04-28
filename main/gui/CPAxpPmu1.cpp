@@ -43,73 +43,85 @@ namespace redstone
     {
         Log::info(TAG, "Creating CPAxpPmu1");
 
+        // create a plain style
+        lv_style_init(&plain_style);
+        lv_style_set_pad_top(&plain_style, LV_STATE_DEFAULT, 10);
+        lv_style_set_pad_bottom(&plain_style, LV_STATE_DEFAULT, 10);
+        lv_style_set_pad_left(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_pad_right(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_line_opa(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_pad_inner(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_margin_all(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_border_width(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_radius(&plain_style, LV_STATE_DEFAULT, 0);
+
         // create style for the content container
-        lv_style_copy(&content_container_style, &lv_style_plain);
-        content_container_style.body.main_color = lv_color_hex3(0X090);     // green
-        content_container_style.body.grad_color = lv_color_hex3(0X090);     // green
+        lv_style_copy(&content_container_style, &plain_style);
+        lv_style_set_bg_color(&content_container_style, LV_STATE_DEFAULT, lv_color_hex3(0x090));  // green
 
         // create a content container
         content_container = lv_cont_create(lv_scr_act(), NULL);
-        lv_cont_set_style(content_container, LV_CONT_STYLE_MAIN, &content_container_style);
+        lv_obj_add_style(content_container, LV_CONT_PART_MAIN, &content_container_style);
         lv_obj_set_size(content_container, width, height);
         lv_obj_align(content_container, NULL, LV_ALIGN_CENTER, 0, 10); // Offset so content pane is below title pane
         lv_obj_set_hidden(content_container, true);
 
         // create style for text value
-        lv_style_copy(&text_label_style, &lv_style_plain);
-        text_label_style.text.color = LV_COLOR_WHITE;
+        lv_style_init(&text_label_style);
+        lv_style_set_text_color(&text_label_style, LV_STATE_DEFAULT, LV_COLOR_WHITE);
+        lv_style_set_text_font(&text_label_style, LV_STATE_DEFAULT, &lv_font_montserrat_12);
 
         // create description for ACIN
         lv_obj_t* label_acin = lv_label_create(content_container, NULL);
-        lv_obj_set_style(label_acin, &text_label_style);
-        lv_label_set_text(label_acin, "ACIN:");
+        lv_obj_add_style(label_acin, LV_LABEL_PART_MAIN, &text_label_style);
+        lv_label_set_text(label_acin, "ACIN:  ");
         lv_obj_align(label_acin, NULL, LV_ALIGN_IN_TOP_LEFT, 4, 4);
 
         // create description for VBUS
         lv_obj_t* label_vbus = lv_label_create(content_container, NULL);
-        lv_obj_set_style(label_vbus, &text_label_style);
-        lv_label_set_text(label_vbus, "VBUS:");
+        lv_obj_add_style(label_vbus, LV_LABEL_PART_MAIN, &text_label_style);
+        lv_label_set_text(label_vbus, "VBUS:  ");
         lv_obj_align(label_vbus, label_acin, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 4);
 
         // create description for Battery
         lv_obj_t* label_battery = lv_label_create(content_container, NULL);
-        lv_obj_set_style(label_battery, &text_label_style);
-        lv_label_set_text(label_battery, "BATT:");
+        lv_obj_add_style(label_battery, LV_LABEL_PART_MAIN, &text_label_style);
+        lv_label_set_text(label_battery, "BATT:  ");
         lv_obj_align(label_battery, label_vbus, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 4);
 
         // create a dynamic label for ACIN voltage value
         acin_voltage_value_label = lv_label_create(content_container, NULL);
-        lv_obj_set_style(acin_voltage_value_label, &text_label_style);
+        lv_obj_add_style(acin_voltage_value_label, LV_LABEL_PART_MAIN, &text_label_style);
         lv_label_set_text(acin_voltage_value_label, "--");
         lv_obj_align(acin_voltage_value_label, label_acin, LV_ALIGN_OUT_RIGHT_MID, 0, 0);
 
         // create a dynamic label for VBUS voltage value
         vbus_voltage_value_label = lv_label_create(content_container, NULL);
-        lv_obj_set_style(vbus_voltage_value_label, &text_label_style);
+        lv_obj_add_style(vbus_voltage_value_label, LV_LABEL_PART_MAIN, &text_label_style);
         lv_label_set_text(vbus_voltage_value_label, "--");
         lv_obj_align(vbus_voltage_value_label, label_vbus, LV_ALIGN_OUT_RIGHT_MID, 0, 0);
 
         // create a dynamic label for battery voltage value
         battery_voltage_value_label = lv_label_create(content_container, NULL);
-        lv_obj_set_style(battery_voltage_value_label, &text_label_style);
+        lv_obj_add_style(battery_voltage_value_label, LV_LABEL_PART_MAIN, &text_label_style);
         lv_label_set_text(battery_voltage_value_label, "--");
         lv_obj_align(battery_voltage_value_label, label_battery, LV_ALIGN_OUT_RIGHT_MID, 0, 0);
 
         // create a dynamic label for ACIN current value
         acin_current_value_label = lv_label_create(content_container, NULL);
-        lv_obj_set_style(acin_current_value_label, &text_label_style);
+        lv_obj_add_style(acin_current_value_label, LV_LABEL_PART_MAIN, &text_label_style);
         lv_label_set_text(acin_current_value_label, "--");
         lv_obj_align(acin_current_value_label, label_acin, LV_ALIGN_OUT_RIGHT_MID, 50, 0);
 
         // create a dynamic label for VBUS current value
         vbus_current_value_label = lv_label_create(content_container, NULL);
-        lv_obj_set_style(vbus_current_value_label, &text_label_style);
+        lv_obj_add_style(vbus_current_value_label, LV_LABEL_PART_MAIN, &text_label_style);
         lv_label_set_text(vbus_current_value_label, "--");
         lv_obj_align(vbus_current_value_label, label_vbus, LV_ALIGN_OUT_RIGHT_MID, 50, 0);
 
         // create a dynamic label for battery current value
         battery_current_value_label = lv_label_create(content_container, NULL);
-        lv_obj_set_style(battery_current_value_label, &text_label_style);
+        lv_obj_add_style(battery_current_value_label, LV_LABEL_PART_MAIN, &text_label_style);
         lv_label_set_text(battery_current_value_label, "--");
         lv_obj_align(battery_current_value_label, label_battery, LV_ALIGN_OUT_RIGHT_MID, 50, 0);
     }

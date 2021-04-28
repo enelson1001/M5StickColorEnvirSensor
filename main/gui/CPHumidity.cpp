@@ -43,55 +43,67 @@ namespace redstone
     {
         Log::info(TAG, "Creating CPHumidity");
 
+        // create a plain style
+        lv_style_init(&plain_style);
+        lv_style_set_pad_top(&plain_style, LV_STATE_DEFAULT, 10);
+        lv_style_set_pad_bottom(&plain_style, LV_STATE_DEFAULT, 10);
+        lv_style_set_pad_left(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_pad_right(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_line_opa(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_pad_inner(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_margin_all(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_border_width(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_radius(&plain_style, LV_STATE_DEFAULT, 0);
+
         // create style for the content container
-        lv_style_copy(&content_container_style, &lv_style_plain);
-        content_container_style.body.main_color = lv_color_hex3(0x00C);  // blue
-        content_container_style.body.grad_color = lv_color_hex3(0x00C);  // blue
+        lv_style_copy(&content_container_style, &plain_style);
+        lv_style_set_bg_color(&content_container_style, LV_STATE_DEFAULT, lv_color_hex3(0x00c));  // blue
 
         // create a content container
         content_container = lv_cont_create(lv_scr_act(), NULL);
-        lv_cont_set_style(content_container, LV_CONT_STYLE_MAIN, &content_container_style);
+        lv_obj_add_style(content_container, LV_CONT_PART_MAIN, &content_container_style);
         lv_obj_set_size(content_container, width, height);
         lv_obj_align(content_container, NULL, LV_ALIGN_CENTER, 0, 10); // Offset so content pane is below title pane
         lv_obj_set_hidden(content_container, true);
 
         // create style for labels
-        lv_style_copy(&text_label_style, &lv_style_plain);
-        text_label_style.text.color = LV_COLOR_WHITE;
+        lv_style_init(&text_label_style);
+        lv_style_set_text_color(&text_label_style, LV_STATE_DEFAULT, LV_COLOR_WHITE);
+        lv_style_set_text_font(&text_label_style, LV_STATE_DEFAULT, &lv_font_montserrat_12);
 
         // create description for humidity
         lv_obj_t* label_humid = lv_label_create(content_container, NULL);
-        lv_obj_set_style(label_humid, &text_label_style);
-        lv_label_set_text(label_humid, "Humidity  :");
+        lv_obj_add_style(label_humid, LV_LABEL_PART_MAIN, &text_label_style);
+        lv_label_set_text(label_humid, "Humidity  :  ");
         lv_obj_align(label_humid, NULL, LV_ALIGN_IN_TOP_LEFT, 4, 4);
 
         // create description for heat index
         lv_obj_t* label_heat_index = lv_label_create(content_container, NULL);
-        lv_obj_set_style(label_heat_index, &text_label_style);
-        lv_label_set_text(label_heat_index, "Heat Index:");
+        lv_obj_add_style(label_heat_index, LV_LABEL_PART_MAIN, &text_label_style);
+        lv_label_set_text(label_heat_index, "Heat Index:  ");
         lv_obj_align(label_heat_index, label_humid, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 4);
 
         // create description for dew point
         lv_obj_t* label_dew_point = lv_label_create(content_container, NULL);
-        lv_obj_set_style(label_dew_point, &text_label_style);
-        lv_label_set_text(label_dew_point, "Dew Point :");
+        lv_obj_add_style(label_dew_point, LV_LABEL_PART_MAIN, &text_label_style);
+        lv_label_set_text(label_dew_point, "Dew Point :  ");
         lv_obj_align(label_dew_point, label_heat_index, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 4);
 
         // create a dynamic label for humidity measurement value
         humidity_value_label = lv_label_create(content_container, NULL);
-        lv_obj_set_style(humidity_value_label, &text_label_style);
+        lv_obj_add_style(humidity_value_label, LV_LABEL_PART_MAIN, &text_label_style);
         lv_label_set_text(humidity_value_label, "--");
         lv_obj_align(humidity_value_label, label_humid, LV_ALIGN_OUT_RIGHT_MID, 0, 0);
 
         // create a dynamic label for heat index measurement value
         heat_index_value_label = lv_label_create(content_container, NULL);
-        lv_obj_set_style(heat_index_value_label, &text_label_style);
+        lv_obj_add_style(heat_index_value_label, LV_LABEL_PART_MAIN, &text_label_style);
         lv_label_set_text(heat_index_value_label, "--");
         lv_obj_align(heat_index_value_label, label_heat_index, LV_ALIGN_OUT_RIGHT_MID, 0, 0);
 
         // create a dynamic label for dew point measurement value
         dew_point_value_label = lv_label_create(content_container, NULL);
-        lv_obj_set_style(dew_point_value_label, &text_label_style);
+        lv_obj_add_style(dew_point_value_label, LV_LABEL_PART_MAIN, &text_label_style);
         lv_label_set_text(dew_point_value_label, "--");
         lv_obj_align(dew_point_value_label, label_dew_point, LV_ALIGN_OUT_RIGHT_MID, 0, 0);
     }

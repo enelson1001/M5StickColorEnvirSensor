@@ -23,21 +23,21 @@
 //  I (7459475) M5StickC: Tue 25 - 1:12:00 PM 
 //  E (7459478) APP: The Alarm Active Count = 3
 //  I (7459484) MemStat: Mem type |  8-bit free | Smallest block | Minimum free | 32-bit free | Smallest block | Minimum free
-//  I (7459495) MemStat: INTERNAL |      150332 |         113804 |       149516 |      200752 |         113804 |       199928
-//  I (7459506) MemStat:      DMA |      150248 |         113804 |       149516 |      150248 |         113804 |       149516
+//  I (7459495) MemStat: INTERNAL |      173328 |          65536 |       172564 |      201776 |          65536 |       201000
+//  I (7459506) MemStat:      DMA |      173412 |          65536 |       172564 |      173412 |          65536 |       172564
 //  I (7459518) MemStat:   SPIRAM |           0 |              0 |            0 |           0 |              0 |            0
 //  I (7459530) MemStat: 
 //  I (7459532) MemStat:             Name |      Stack |  Min free stack |  Max used stack
-//  I (7459541) MemStat:         LvglTask |       4096 |             400 |            3696
-//  I (7459550) MemStat:        HwBtnTask |       3000 |             924 |            2076
-//  I (7459558) MemStat: SocketDispatcher |      20480 |           18396 |            2084
-//  I (7459567) MemStat:         MainTask |      16384 |           12556 |            3828
+//  I (7459541) MemStat:         LvglTask |       4096 |             336 |            3760
+//  I (7459550) MemStat:        HwBtnTask |       3000 |             596 |            2404
+//  I (7459558) MemStat: SocketDispatcher |      20480 |           18080 |            2400
+//  I (7459567) MemStat:         MainTask |      16384 |           12276 |            4108
 //
-// Esp32-IDF version: v4.0-beta2
-// Toolchain version: xtensa-esp32-elf-gcc (crosstool-NG esp32-2019r1) 8.2.0
-// Lvgl version: v6.1.2 - SHA1: 2ead4959
-// Smooth version: master SHA1: b4bf80b4
-// Bin file size: 1,173,424 bytes
+// Esp32-IDF version: v4.3-beta3 - commit e9cf9e2 - April 14, 2021
+// Toolchain version: esp-2020r3-8.4.0/xtensa-esp32-elf
+// Lvgl version:  v7.11.0 - commit: ec9de51, March, 2021
+// Smooth version: master - commit: 5578b8b, April 15, 2021
+// Bin file size: 1,368,000 bytes
 //******************************************************************************************************************
 #include "App.h"
 #include <smooth/core/task_priorities.h>

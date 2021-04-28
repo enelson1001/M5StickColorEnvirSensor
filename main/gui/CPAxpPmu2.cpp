@@ -43,55 +43,67 @@ namespace redstone
     {
         Log::info(TAG, "Creating CPAxpPmu2");
 
+        // create a plain style
+        lv_style_init(&plain_style);
+        lv_style_set_pad_top(&plain_style, LV_STATE_DEFAULT, 10);
+        lv_style_set_pad_bottom(&plain_style, LV_STATE_DEFAULT, 10);
+        lv_style_set_pad_left(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_pad_right(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_line_opa(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_pad_inner(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_margin_all(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_border_width(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_radius(&plain_style, LV_STATE_DEFAULT, 0);
+
         // create style for the content container
-        lv_style_copy(&content_container_style, &lv_style_plain);
-        content_container_style.body.main_color = lv_color_hex3(0X090);     // green
-        content_container_style.body.grad_color = lv_color_hex3(0X090);     // green
+        lv_style_copy(&content_container_style, &plain_style);
+        lv_style_set_bg_color(&content_container_style, LV_STATE_DEFAULT, lv_color_hex3(0x090));  // green
 
         // create a content container
         content_container = lv_cont_create(lv_scr_act(), NULL);
-        lv_cont_set_style(content_container, LV_CONT_STYLE_MAIN, &content_container_style);
+        lv_obj_add_style(content_container, LV_CONT_PART_MAIN, &content_container_style);
         lv_obj_set_size(content_container, width, height);
         lv_obj_align(content_container, NULL, LV_ALIGN_CENTER, 0, 10); // Offset so content pane is below title pane
         lv_obj_set_hidden(content_container, true);
 
         // create style for text value
-        lv_style_copy(&text_label_style, &lv_style_plain);
-        text_label_style.text.color = LV_COLOR_WHITE;
+        lv_style_init(&text_label_style);
+        lv_style_set_text_color(&text_label_style, LV_STATE_DEFAULT, LV_COLOR_WHITE);
+        lv_style_set_text_font(&text_label_style, LV_STATE_DEFAULT, &lv_font_montserrat_12);
 
         // create description for APS
         lv_obj_t* label_aps = lv_label_create(content_container, NULL);
-        lv_obj_set_style(label_aps, &text_label_style);
-        lv_label_set_text(label_aps, "IPSOUT   :");
+        lv_obj_add_style(label_aps, LV_LABEL_PART_MAIN, &text_label_style);
+        lv_label_set_text(label_aps, "IPSOUT   :  ");
         lv_obj_align(label_aps, NULL, LV_ALIGN_IN_TOP_LEFT, 4, 4);
 
         // create description for Axp Temp
         lv_obj_t* label_axp_temp = lv_label_create(content_container, NULL);
-        lv_obj_set_style(label_axp_temp, &text_label_style);
-        lv_label_set_text(label_axp_temp, "AXP Temp :");
+        lv_obj_add_style(label_axp_temp, LV_LABEL_PART_MAIN, &text_label_style);
+        lv_label_set_text(label_axp_temp, "AXP Temp :  ");
         lv_obj_align(label_axp_temp, label_aps, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 4);
 
         // create description for battery power
         lv_obj_t* label_batt_pwr = lv_label_create(content_container, NULL);
-        lv_obj_set_style(label_batt_pwr, &text_label_style);
-        lv_label_set_text(label_batt_pwr, "BAT Power:");
+        lv_obj_add_style(label_batt_pwr, LV_LABEL_PART_MAIN, &text_label_style);
+        lv_label_set_text(label_batt_pwr, "BAT Power:  ");
         lv_obj_align(label_batt_pwr, label_axp_temp, LV_ALIGN_OUT_BOTTOM_LEFT, 0, 4);
 
         // create a dynamic label for APS voltage value
         aps_voltage_value_label = lv_label_create(content_container, NULL);
-        lv_obj_set_style(aps_voltage_value_label, &text_label_style);
+        lv_obj_add_style(aps_voltage_value_label, LV_LABEL_PART_MAIN, &text_label_style);
         lv_label_set_text(aps_voltage_value_label, "--");
         lv_obj_align(aps_voltage_value_label, label_aps, LV_ALIGN_OUT_RIGHT_MID, 0, 0);
 
         // create a dynamic label for AXP device temperature value
         axp_device_temp_value_label = lv_label_create(content_container, NULL);
-        lv_obj_set_style(axp_device_temp_value_label, &text_label_style);
+        lv_obj_add_style(axp_device_temp_value_label, LV_LABEL_PART_MAIN, &text_label_style);
         lv_label_set_text(axp_device_temp_value_label, "--");
         lv_obj_align(axp_device_temp_value_label, label_axp_temp, LV_ALIGN_OUT_RIGHT_MID, 0, 0);
 
         // create a dynamic label for battery power value
         battery_power_value_label = lv_label_create(content_container, NULL);
-        lv_obj_set_style(battery_power_value_label, &text_label_style);
+        lv_obj_add_style(battery_power_value_label, LV_LABEL_PART_MAIN, &text_label_style);
         lv_label_set_text(battery_power_value_label, "--");
         lv_obj_align(battery_power_value_label, label_batt_pwr, LV_ALIGN_OUT_RIGHT_MID, 0, 0);
     }

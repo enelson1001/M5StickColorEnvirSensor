@@ -43,26 +43,37 @@ namespace redstone
     {
         Log::info(TAG, "Creating CPTemperature");
 
+        // create a plain style
+        lv_style_init(&plain_style);
+        lv_style_set_pad_top(&plain_style, LV_STATE_DEFAULT, 10);
+        lv_style_set_pad_bottom(&plain_style, LV_STATE_DEFAULT, 10);
+        lv_style_set_pad_left(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_pad_right(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_line_opa(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_pad_inner(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_margin_all(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_border_width(&plain_style, LV_STATE_DEFAULT, 0);
+        lv_style_set_radius(&plain_style, LV_STATE_DEFAULT, 0);
+
         // create style for the content container
-        lv_style_copy(&content_container_style, &lv_style_plain);
-        content_container_style.body.main_color = lv_color_hex3(0x00C);  // blue
-        content_container_style.body.grad_color = lv_color_hex3(0x00C);  // blue
+        lv_style_copy(&content_container_style, &plain_style);
+        lv_style_set_bg_color(&content_container_style, LV_STATE_DEFAULT, lv_color_hex3(0x00c));  // blue
 
         // create a content container
         content_container = lv_cont_create(lv_scr_act(), NULL);
         lv_obj_set_size(content_container, width, height);
         lv_obj_align(content_container, NULL, LV_ALIGN_CENTER, 0, 10); // Offset so content pane is below title pane
-        lv_cont_set_style(content_container, LV_CONT_STYLE_MAIN, &content_container_style);
+        lv_obj_add_style(content_container, LV_CONT_PART_MAIN, &content_container_style);
         lv_obj_set_hidden(content_container, true);
 
         // create style for temperature value
-        lv_style_copy(&temperature_label_style, &lv_style_plain);
-        temperature_label_style.text.font = &lv_font_14x14B_latin1_sup;
-        temperature_label_style.text.color = LV_COLOR_WHITE;
+        lv_style_init(&temperature_label_style);
+        lv_style_set_text_font(&temperature_label_style, LV_STATE_DEFAULT, &lv_font_montserrat_24);
+        lv_style_set_text_color(&temperature_label_style, LV_STATE_DEFAULT, LV_COLOR_WHITE);
 
         // create a dynamic label for temperature measurement value
         temperature_value_label = lv_label_create(content_container, NULL);
-        lv_obj_set_style(temperature_value_label, &temperature_label_style);
+        lv_obj_add_style(temperature_value_label, LV_LABEL_PART_MAIN, &temperature_label_style);
         lv_label_set_text(temperature_value_label, "--");
         lv_obj_align(temperature_value_label, NULL, LV_ALIGN_CENTER, 5, 0);
     }
